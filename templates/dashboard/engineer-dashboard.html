@@ -1,0 +1,321 @@
+{%extends 'dashboard/base.html'%}
+{%load static%}
+
+{%block content%}
+<div class="page-container">
+
+    <div class="page-title-box">
+        
+        <div class="d-flex align-items-sm-center flex-sm-row flex-column gap-2">
+            <div class="flex-grow-1">
+                <h4 class="font-18 mb-0">Engineer Dashboard</h4>
+            </div>
+
+            <!-- <div class="text-end">
+                <ol class="breadcrumb m-0 py-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Simple</a></li>
+                    
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Navigation</a></li>
+                    
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </div> -->
+        </div>
+        
+
+        
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <div class="card widget-inline">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                <div class="text-center p-3">
+                                    <h2 class="mt-2"><i class="text-success mdi mdi-book-open-page-variant me-2"></i> <b>{{active_tickets.count}}</b></h2>
+                                    <p class="text-muted mb-0">Active Tickets</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                <div class="text-center p-3">
+                                    <h2 class="mt-2"><i class="text-danger mdi mdi-book-check-outline me-2"></i> <b>{{resolved_tickets.count}}</b></h2>
+                                    <p class="text-muted mb-0">Resolved Tickets</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                <div class="text-center p-3">
+                                    <h2 class="mt-2"><i class="text-info mdi mdi-text-box-multiple-outline me-2"></i> <b>{{tickets.count}}</b></h2>
+                                    <p class="text-muted mb-0">Total Tickets</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="text-center p-3">
+                                    <h2 class="mt-2"><i class="text-danger mdi mdi-cellphone-link me-2"></i> <b>N/A</b></h2>
+                                    <p class="text-muted mb-0">Total visits</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end row -->
+
+    <!-- <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mt-0 font-14">Total Revenue</h5>
+                    <div class="text-center">
+                        <ul class="list-inline chart-detail-list">
+                            <li class="list-inline-item">
+                                <p class="font-weight-semibold"><i class="fa fa-circle me-2 text-primary"></i>Series A</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="font-weight-semibold"><i class="fa fa-circle me-2 text-muted"></i>Series B</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="dashboard-bar-stacked" class="morris-chart" dir="ltr"  style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mt-0 font-14">Sales Analytics</h5>
+                    <div class="text-center">
+                        <ul class="list-inline chart-detail-list">
+                            <li class="list-inline-item">
+                                <p class="font-weight-semibold"><i class="fa fa-circle me-2 text-primary"></i>Mobiles</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="font-weight-semibold"><i class="fa fa-circle me-2 text-info"></i>Tablets</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="dashboard-line-chart" class="morris-chart" dir="ltr" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+       
+    </div> -->
+    <!-- end row -->
+
+    <!-- <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mt-0 font-14 mb-3">Contacts</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover mails m-0 table table-actions-bar table-centered">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 95px;">
+
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="action-checkbox">
+                                            <label class="form-check-label" for="action-checkbox">&nbsp;</label>
+                                        </div>
+                                    </th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Products</th>
+                                    <th>Start Date</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="form-check me-2 float-start">
+                                            <input id="checkbox2" class="form-check-input" type="checkbox">
+                                            <label for="checkbox2" class="form-check-label"></label>
+                                        </div>
+
+                                        <img src="assets/images/users/avatar-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                    </td>
+
+                                    <td>
+                                        Tomaslau
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="text-muted">tomaslau@dummy.com</a>
+                                    </td>
+
+                                    <td>
+                                        <b><a href="#" class="text-dark"><b>356</b></a>
+                                        </b>
+                                    </td>
+
+                                    <td>
+                                        01/11/2003
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check me-2 float-start">
+                                            <input id="checkbox1"  class="form-check-input" type="checkbox">
+                                            <label for="checkbox1" class="form-check-label"></label>
+                                        </div>
+
+                                        <img src="assets/images/users/avatar-1.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                    </td>
+
+                                    <td>
+                                        Chadengle
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="text-muted">chadengle@dummy.com</a>
+                                    </td>
+
+                                    <td>
+                                        <b><a href="#" class="text-dark"><b>568</b></a>
+                                        </b>
+                                    </td>
+
+                                    <td>
+                                        01/11/2003
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check me-2 float-start">
+                                            <input id="checkbox3" class="form-check-input" type="checkbox">
+                                            <label for="checkbox3" class="form-check-label"></label>
+                                        </div>
+
+                                        <img src="assets/images/users/avatar-3.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                    </td>
+
+                                    <td>
+                                        Stillnotdavid
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="text-muted">stillnotdavid@dummy.com</a>
+                                    </td>
+                                    <td>
+                                        <b><a href="#" class="text-dark"><b>201</b></a>
+                                        </b>
+                                    </td>
+
+                                    <td>
+                                        12/11/2003
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check me-2 float-start">
+                                            <input id="checkbox4" class="form-check-input" type="checkbox">
+                                            <label for="checkbox4" class="form-check-label"></label>
+                                        </div>
+
+                                        <img src="assets/images/users/avatar-4.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                    </td>
+
+                                    <td>
+                                        Kurafire
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="text-muted">kurafire@dummy.com</a>
+                                    </td>
+
+                                    <td>
+                                        <b><a href="#" class="text-dark"><b>56</b></a>
+                                        </b>
+                                    </td>
+
+                                    <td>
+                                        14/11/2003
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check me-2 float-start">
+                                            <input id="checkbox5" class="form-check-input" type="checkbox">
+                                            <label for="checkbox5" class="form-check-label" ></label>
+                                        </div>
+
+                                        <img src="assets/images/users/avatar-5.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                    </td>
+
+                                    <td>
+                                        Shahedk
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="text-muted">shahedk@dummy.com</a>
+                                    </td>
+
+                                    <td>
+                                        <b><a href="#" class="text-dark"><b>356</b></a>
+                                        </b>
+                                    </td>
+
+                                    <td>
+                                        20/11/2003
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check me-2 float-start">
+                                            <input id="checkbox6" class="form-check-input" type="checkbox">
+                                            <label for="checkbox6" class="form-check-label"></label>
+                                        </div>
+
+                                        <img src="assets/images/users/avatar-6.jpg" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                    </td>
+
+                                    <td>
+                                        Adhamdannaway
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="text-muted">adhamdannaway@dummy.com</a>
+                                    </td>
+
+                                    <td>
+                                        <b><a href="#" class="text-dark"><b>956</b></a>
+                                        </b>
+                                    </td>
+
+                                    <td>
+                                        24/11/2003
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- end row -->
+
+</div> <!-- container -->
+{%endblock%}

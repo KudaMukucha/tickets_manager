@@ -1,0 +1,164 @@
+{%extends 'dashboard/base.html'%}
+{%load static%}
+
+{%block content%}
+<div class="page-container">
+
+    <div class="page-title-box">
+        
+        <div class="d-flex align-items-sm-center flex-sm-row flex-column gap-2">
+            <div class="flex-grow-1">
+                <h4 class="font-18 mb-0">Ticket Details</h4>
+            </div>
+
+    
+        </div>
+    
+    </div>
+
+
+    <div class="card">
+        <div class="card-body">
+            <div class="">
+                <!-- <ul class="nav nav-tabs nav-bordered mb-4">
+                    <li class="nav-item">
+                        <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                            Settings
+                        </a>
+                    </li>
+                </ul> -->
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home-b1">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <!-- Personal-Information -->
+                                <div class="panel border panel-fill mb-4">
+                                    <div class="card-header">
+                                        <h5 class="font-16 m-1">Quick Info</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <strong>Ticket ID:</strong>
+                                            <br>
+                                            <p class="text-muted">{{ticket.ticket_id}}</p>
+                                        </div>
+                                        <div class="mb-4">
+                                            <strong>Customer:</strong>
+                                            <br>
+                                            <p class="text-muted">{{ticket.customer}}</p>
+                                        </div>
+                                        <div class="mb-4">
+                                            <strong>Engineer:</strong>
+                                            <br>
+                                            <p class="text-muted">{{ticket.engineer}}</p>
+                                        </div>
+                                        <div class="mb-4">
+                                            <strong>Created On:</strong>
+                                            <br>
+                                            <p class="text-muted mb-0">{{ticket.created}}</p>
+                                        </div>
+
+                                        <div class="mb-0">
+                                            <strong>Severity:</strong>
+                                            <br>
+                                            <p class="text-muted mb-0">{{ticket.severity}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Personal-Information -->
+
+                       
+                            </div>
+
+                            <div class="col-lg-8">
+                                <!-- Personal-Information -->
+                                <div class="panel border panel-fill">
+                                    <div class="card-header">
+                                        <h5 class="font-16 m-1">{{ticket.title}}</h5>
+                                        {%if ticket.status == 'Pending'%}
+                                  <p>Status: <span class="badge badge-soft-warning rounded-pill">Not yet assigned to engineer</span></p>
+                                        {%elif ticket.status == 'Active'%}
+                                       <p>Status: <span class="badge badge-soft-success rounded-pill">Engineer working on the issue.</span></p>
+                                        {%elif ticket.status == 'Resolved'%}
+                                      <p>Status: <span class="badge badge-soft-warning rounded-pill">Issue was resolved successfully.</span></p>
+                                        {%endif%}
+                                    </div>
+                                    <div class="card-body ">
+                                        
+                                        <p>{{ticket.description | linebreaks}}</p>
+                                    </div>
+                                    <div class="m-4">
+                                        {%if ticket.is_resolved%}
+                                        <h6 class="text-decoration-underline text-muted">Resolution Steps</h6>
+                                          <p>  {{ticket.resolution_steps}}</p>
+                                          {%else%}
+                                          {%if request.user.is_engineer%}
+                                          <p>Resolution Steps</p>
+                                            <form method="post" action="{%url 'ticket:resolve-ticket' ticket.ticket_id%}">
+                                                {%csrf_token%}
+                                                <textarea name="rs" id="" cols="55" rows="10"></textarea>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light width-md">Mark As Resolved</button>
+                                            </form>
+                                            {%endif%}
+                                        {%endif%}
+                                    </div>
+                                </div>
+                                <!-- Personal-Information -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="profile-b1">
+                        <!-- Personal-Information -->
+                        <div class="panel border panel-fill">
+                            <div class="card-header">
+                                <h5 class="font-16 m-1">Edit Profile</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="FullName">Full Name</label>
+                                        <input type="text" value="John Doe" id="FullName" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Email">Email</label>
+                                        <input type="email" value="first.last@example.com" id="Email" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Username">Username</label>
+                                        <input type="text" value="john" id="Username" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Password">Password</label>
+                                        <input type="password" placeholder="6 - 15 Characters" id="Password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="RePassword">Re-Password</label>
+                                        <input type="password" placeholder="6 - 15 Characters" id="RePassword" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="AboutMe">About Me</label>
+                                        <textarea style="height: 125px" id="AboutMe" class="form-control">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</textarea>
+                                    </div>
+                                    <button class="btn btn-primary waves-effect waves-light width-md" type="submit">Save</button>
+                                </form>
+
+                            </div>
+                        </div>
+                        <!-- Personal-Information -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div> <!-- container -->
+{%endblock%}

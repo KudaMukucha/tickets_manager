@@ -1,0 +1,52 @@
+{%extends 'dashboard/base.html'%}
+{%load static%}
+{%load humanize%}
+
+{%block content%}
+<div class="page-container">
+
+    <div class="page-title-box">
+        
+        <div class="d-flex align-items-sm-center flex-sm-row flex-column gap-2">
+            <div class="flex-grow-1">
+                <h4 class="font-18 mb-0">Resolved Tickets</h4>
+            </div>
+        </div>
+                
+    </div>
+
+    {%if tickets%}
+    <div class="row">
+        {%for ticket in tickets%}
+        <div class="col-lg-4">
+            <div class="card card-body">
+                <h5 class="card-title">{{ticket.title}}</h5>
+                <p class="card-text">{{ticket.description | truncatewords:8}}</p>
+                <a href="{%url 'ticket:ticket-details' ticket.ticket_id%}" class="btn btn-primary">View Ticket Details</a>
+                <div class="d-flex align-items-center gap-5 mt-2">
+                    <p class="card-text">{{ticket.created | naturaltime}}</p>
+                  {%if ticket.status == 'Pending'%}
+                  <p> <span class="badge badge-soft-warning rounded-pill">Pending</span></p>
+                  {%elif ticket.status == 'Active'%}
+                  <p> <span class="badge badge-soft-success rounded-pill">Active</span></p>
+                    {%elif ticket.status == 'Resolved'%}
+                    <p> <span class="badge badge-soft-danger rounded-pill">Resolved</span></p>
+                  {%endif%}
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    {%include 'pagination.html' with page=tickets%}
+    {%else%}
+    <div class="alert alert-dark d-flex align-items-center mb-0" role="alert">
+        <iconify-icon icon="solar:balloon-bold-duotone" class="font-20 me-1"></iconify-icon>
+        <div class="lh-1">No tickets at the moment.
+        </div>
+    </div>
+    {%endif%}
+    <!-- end row -->
+
+
+</div> <!-- container -->
+{%endblock%}

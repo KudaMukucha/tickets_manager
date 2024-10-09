@@ -1,0 +1,70 @@
+{%extends 'dashboard/base.html'%}
+{%load static%}
+
+{%block content%}
+<div class="page-container">
+
+    <div class="page-title-box">
+        
+        <div class="d-flex align-items-sm-center flex-sm-row flex-column gap-2">
+            <div class="flex-grow-1">
+                <h4 class="font-18 mb-0">Ticket Queue</h4>
+            </div>
+
+           
+        </div>
+        
+
+        
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                
+                {%if tickets%}
+                <div class="card-body pt-2">
+                    <table id="responsive-datatable" class="mt-3 table table-bordered table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Ticket Title</th>
+                                <th>Customer</th>
+                                <th>Date Created</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+    
+                        
+                        <tbody>
+                            {%for ticket in tickets%}
+                            <tr>
+                                <td><a href="{%url 'ticket:ticket-details' ticket.ticket_id%}">{{ticket.ticket_id}}</a></td>
+                                <td>{{ticket.title}}</td>
+                                <td>{{ticket.customer}}</td>
+                                <td>{{ticket.created | date}}</td>
+                                <td> <a href="{%url 'ticket:assign-ticket' ticket.ticket_id%}" class="btn btn-outline-primary">Assign to Engineer</a></td>
+                            </tr>
+                            {%endfor%}
+                           
+                        </tbody>
+                    </table>
+                </div>
+                {%else%}
+                <div class="alert alert-secondary d-flex align-items-center pt-2" role="alert">
+                    <iconify-icon icon="solar:bicycling-round-bold-duotone" class="font-20 me-1"></iconify-icon>
+                    <div class="lh-1"> No tickets in the queue at the moment!</div>
+                </div>
+                {%endif%}
+            </div>
+        </div>
+    </div> <!-- end row -->
+ <!-- end row -->
+
+
+
+
+
+
+
+</div> <!-- container -->
+{%endblock%}
